@@ -1,23 +1,32 @@
 from presencas import *
 import pyautogui as p
 from connection import connection
+from datetime import date
+import socket
 
+sem = ("Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado", 'Domingo')
+data_atual = date.today().strftime('%d/%m/%Y')
+weekday = sem[date.today().weekday()]
 alert = "font-size:16px;position: relative; padding: 0.75rem 1.25rem; margin-bottom: 1rem; border: 1px solid transparent;border-radius: 0.25rem;"
 alertPrimary = alert+"color: #004085; background-color: #cce5ff; border-color: #b8daff;"
 alertSuccess = alert+"color: #155724;background-color: #d4edda;border-color: #c3e6cb;"
 alertDanger = alert+"color: #721c24; background-color: #f8d7da; border-color: #f5c6cb;"
 
    
+def verificarPresenca(CodigoContrato, DataPresenca, HoraPresenca):
+    db = connection(host='localhost', user="prepara2", password="prepara", database="bd_presencas")
+    user = db.selectUserPresenca(CodigoContrato, DataPresenca, HoraPresenca)
+    return user
 
 def verificarUsuario(CodigoContrato):
     import requests as r
     import json
-    db = connection(host='servidorouro', user="prepara2", password="prepara", database="ouromoderno")
+    db = connection(host='localhost', user="prepara2", password="prepara", database="ouromoderno")
     user = db.selectUserOuro(CodigoContrato)
     if user: 
         return user
     else:
-        user = r.get("http://192.168.1.11/presencas/controllers/ApiController.php?CodigoContrato="+CodigoContrato)
+        user = r.get("http://localhost/presencas/controllers/ApiController.php?CodigoContrato="+CodigoContrato)
         return json.loads(user.content)
 
 def marcarPresenca():
@@ -54,12 +63,27 @@ def marcarPresenca():
 
     if CodigoContrato and len(HoraPresenca) >= 1:
         user = verificarUsuario(CodigoContrato)
-
         try:
             alert.setText(user['message'])
             alert.setStyleSheet(alertDanger)
         except:
-            print(user)
+            data = {
+                "CodigoContrato" : CodigoContrato,
+                "HoraPresenca": HoraPresenca,
+                "NomeAluno" : user['NomeAluno'],
+                "DataPresenca" : ui.DataPresenca.text(),
+                "DiaSemana" : ui.DiaSemana.text(),
+                "Computador" : ui.Computador.text(),
+                "IpComputador" : ui.IpComputador.text(),
+            }
+            for HoraP in data["HoraPresenca"]:
+                presencaConfirmada = verificarPresenca(CodigoContrato=data["CodigoContrato"], DataPresenca=data["DataPresenca"], HoraPresenca=HoraP)
+                if(presencaConfirmada):
+                    pass
+                else:
+                    print(HoraP)
+
+
     else:
         alert.setText("Não foi possível validar os dados, pois o usuário não foi informado.")
         alert.setStyleSheet(alertDanger)
@@ -80,5 +104,8 @@ if __name__ == '__main__':
     MainWindow.show()
     ui.registrar.clicked.connect(marcarPresenca)
     ui.fechar_alert.clicked.connect(fecharAlert)
-
+    ui.DataPresenca.setText(data_atual)
+    ui.Computador.setText(socket.gethostname())
+    ui.IpComputador.setText(socket.gethostbyname(socket.gethostname()))
+    ui.DiaSemana.setText(weekday)
     sys.exit(app.exec_())

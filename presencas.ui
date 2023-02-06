@@ -822,6 +822,90 @@ color:#fff;</string>
       <string>De 19:00 às 20:00</string>
      </property>
     </widget>
+    <widget class="QLineEdit" name="DataPresenca">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>60</y>
+       <width>161</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border:none;
+border-bottom:1px solid purple;
+outline:none;
+font-size:24px;
+background:#E7D8E9
+</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="DiaSemana">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>160</x>
+       <y>60</y>
+       <width>161</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border:none;
+border-bottom:1px solid purple;
+outline:none;
+font-size:24px;
+background:#E7D8E9
+</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="Computador">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>320</x>
+       <y>60</y>
+       <width>161</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border:none;
+border-bottom:1px solid purple;
+outline:none;
+font-size:24px;
+background:#E7D8E9
+</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="IpComputador">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>480</x>
+       <y>60</y>
+       <width>161</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border:none;
+border-bottom:1px solid purple;
+outline:none;
+font-size:24px;
+background:#E7D8E9
+</string>
+     </property>
+    </widget>
     <zorder>label_5</zorder>
     <zorder>label_7</zorder>
     <zorder>label_6</zorder>
@@ -855,6 +939,10 @@ color:#fff;</string>
     <zorder>quinze</zorder>
     <zorder>oito</zorder>
     <zorder>onze</zorder>
+    <zorder>DataPresenca</zorder>
+    <zorder>DiaSemana</zorder>
+    <zorder>Computador</zorder>
+    <zorder>IpComputador</zorder>
    </widget>
    <widget class="QPushButton" name="registrar">
     <property name="geometry">

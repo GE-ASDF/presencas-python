@@ -17,7 +17,7 @@ class connection:
 
     def selectUserOuro(self, CodigoContrato):
         cursor = self.db_connection.cursor()
-        query = "SELECT * FROM usuarios WHERE LOGIN = %s GROUP BY LOGIN"
+        query = "SELECT NOME AS NomeAluno FROM usuarios WHERE LOGIN = %s GROUP BY LOGIN"
         cursor.execute(query, (CodigoContrato,))
         return cursor.fetchone()
 

@@ -292,6 +292,46 @@ class Ui_widget(object):
 "background:transparent;\n"
 "color:#fff;")
         self.label_26.setObjectName("label_26")
+        self.DataPresenca = QtWidgets.QLineEdit(self.frame_2)
+        self.DataPresenca.setEnabled(False)
+        self.DataPresenca.setGeometry(QtCore.QRect(0, 60, 161, 51))
+        self.DataPresenca.setStyleSheet("border:none;\n"
+"border-bottom:1px solid purple;\n"
+"outline:none;\n"
+"font-size:24px;\n"
+"background:#E7D8E9\n"
+"")
+        self.DataPresenca.setObjectName("DataPresenca")
+        self.DiaSemana = QtWidgets.QLineEdit(self.frame_2)
+        self.DiaSemana.setEnabled(False)
+        self.DiaSemana.setGeometry(QtCore.QRect(160, 60, 161, 51))
+        self.DiaSemana.setStyleSheet("border:none;\n"
+"border-bottom:1px solid purple;\n"
+"outline:none;\n"
+"font-size:24px;\n"
+"background:#E7D8E9\n"
+"")
+        self.DiaSemana.setObjectName("DiaSemana")
+        self.Computador = QtWidgets.QLineEdit(self.frame_2)
+        self.Computador.setEnabled(False)
+        self.Computador.setGeometry(QtCore.QRect(320, 60, 161, 51))
+        self.Computador.setStyleSheet("border:none;\n"
+"border-bottom:1px solid purple;\n"
+"outline:none;\n"
+"font-size:24px;\n"
+"background:#E7D8E9\n"
+"")
+        self.Computador.setObjectName("Computador")
+        self.IpComputador = QtWidgets.QLineEdit(self.frame_2)
+        self.IpComputador.setEnabled(False)
+        self.IpComputador.setGeometry(QtCore.QRect(480, 60, 161, 51))
+        self.IpComputador.setStyleSheet("border:none;\n"
+"border-bottom:1px solid purple;\n"
+"outline:none;\n"
+"font-size:24px;\n"
+"background:#E7D8E9\n"
+"")
+        self.IpComputador.setObjectName("IpComputador")
         self.label_5.raise_()
         self.label_7.raise_()
         self.label_6.raise_()
@@ -325,6 +365,10 @@ class Ui_widget(object):
         self.quinze.raise_()
         self.oito.raise_()
         self.onze.raise_()
+        self.DataPresenca.raise_()
+        self.DiaSemana.raise_()
+        self.Computador.raise_()
+        self.IpComputador.raise_()
         self.registrar = QtWidgets.QPushButton(self.frame)
         self.registrar.setGeometry(QtCore.QRect(30, 680, 131, 41))
         self.registrar.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))

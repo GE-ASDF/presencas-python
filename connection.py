@@ -9,9 +9,9 @@ class connection:
             self.db_connection
         except mysql.connector.Error as error:
             if error.errno == errorcode.ER_BAD_DB_ERROR:
-                return "Database doesn't exist"
+                return None
             elif error.errno == errorcode.ER_ACCESS_DENIED_ERROR:
-                return "Username or password is wrong"
+                return None
             else:
                 return error
 

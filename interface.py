@@ -12,7 +12,7 @@ alertDanger = alert+"color: #721c24; background-color: #f8d7da; border-color: #f
 def verificarUsuario(CodigoContrato):
     import requests as r
     import json
-    db = connection(host='localhost', user="prepara2", password="prepara", database="ouromoderno")
+    db = connection(host='servidorouro', user="prepara2", password="prepara", database="ouromoderno")
     user = db.selectUserOuro(CodigoContrato)
     if user: 
         return user

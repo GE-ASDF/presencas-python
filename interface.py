@@ -12,13 +12,13 @@ alertDanger = alert+"color: #721c24; background-color: #f8d7da; border-color: #f
 def verificarUsuario(CodigoContrato):
     import requests as r
     import json
-    db = connection(host='servidorouro', user="prepara2", password="prepara", database="ouromoderno")
+    db = connection(host='localhost', user="prepara2", password="prepara", database="ouromoderno")
     user = db.selectUserOuro(CodigoContrato)
     if user: 
         return user
     else:
-        user = r.get("https://192.168.1.11/presencas/controllers/ApiController.php?CodigoContrato="+CodigoContrato)
-        return user.content
+        user = r.get("http://192.168.1.11/presencas/controllers/ApiController.php?CodigoContrato="+CodigoContrato)
+        return json.loads(user.content)
 
 def marcarPresenca():
     lista = [
@@ -54,7 +54,12 @@ def marcarPresenca():
 
     if CodigoContrato and len(HoraPresenca) >= 1:
         user = verificarUsuario(CodigoContrato)
-        print(user)
+
+        try:
+            alert.setText(user['message'])
+            alert.setStyleSheet(alertDanger)
+        except:
+            print(user)
     else:
         alert.setText("Não foi possível validar os dados, pois o usuário não foi informado.")
         alert.setStyleSheet(alertDanger)

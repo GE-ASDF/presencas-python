@@ -296,40 +296,40 @@ class Ui_widget(object):
         self.DataPresenca.setEnabled(False)
         self.DataPresenca.setGeometry(QtCore.QRect(0, 60, 161, 51))
         self.DataPresenca.setStyleSheet("border:none;\n"
-"border-bottom:1px solid purple;\n"
+"border-bottom:none;\n"
 "outline:none;\n"
-"font-size:24px;\n"
-"background:#E7D8E9\n"
+"font-size:0px;\n"
+"background:transparent;\n"
 "")
         self.DataPresenca.setObjectName("DataPresenca")
         self.DiaSemana = QtWidgets.QLineEdit(self.frame_2)
         self.DiaSemana.setEnabled(False)
         self.DiaSemana.setGeometry(QtCore.QRect(160, 60, 161, 51))
         self.DiaSemana.setStyleSheet("border:none;\n"
-"border-bottom:1px solid purple;\n"
+"border-bottom:none;\n"
 "outline:none;\n"
-"font-size:24px;\n"
-"background:#E7D8E9\n"
+"font-size:0px;\n"
+"background:transparent;\n"
 "")
         self.DiaSemana.setObjectName("DiaSemana")
         self.Computador = QtWidgets.QLineEdit(self.frame_2)
         self.Computador.setEnabled(False)
         self.Computador.setGeometry(QtCore.QRect(320, 60, 161, 51))
         self.Computador.setStyleSheet("border:none;\n"
-"border-bottom:1px solid purple;\n"
+"border-bottom:none;\n"
 "outline:none;\n"
-"font-size:24px;\n"
-"background:#E7D8E9\n"
+"font-size:0px;\n"
+"background:transparent;\n"
 "")
         self.Computador.setObjectName("Computador")
         self.IpComputador = QtWidgets.QLineEdit(self.frame_2)
         self.IpComputador.setEnabled(False)
         self.IpComputador.setGeometry(QtCore.QRect(480, 60, 161, 51))
         self.IpComputador.setStyleSheet("border:none;\n"
-"border-bottom:1px solid purple;\n"
+"border-bottom:none;\n"
 "outline:none;\n"
-"font-size:24px;\n"
-"background:#E7D8E9\n"
+"font-size:0px;\n"
+"background:transparent;\n"
 "")
         self.IpComputador.setObjectName("IpComputador")
         self.label_5.raise_()

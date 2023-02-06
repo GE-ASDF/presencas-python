@@ -18,7 +18,7 @@ def verificarUsuario(CodigoContrato):
         return user
     else:
         user = r.get("https://192.168.1.11/presencas/controllers/ApiController.php?CodigoContrato="+CodigoContrato)
-        return json.loads(user.content)
+        return user.content
 
 def marcarPresenca():
     lista = [

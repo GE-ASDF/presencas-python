@@ -51,7 +51,8 @@ def marcarPresenca():
     CodigoContrato = ui.CodigoContrato.text()
 
     if CodigoContrato and len(HoraPresenca) >= 1:
-        verificarUsuario(CodigoContrato)
+        user = verificarUsuario(CodigoContrato)
+        print(user)
     else:
         alert.setText("Não foi possível validar os dados, pois o usuário não foi informado.")
         alert.setStyleSheet(alertDanger)

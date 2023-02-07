@@ -32,5 +32,19 @@ class connection:
         cursor.execute(query, (CodigoContrato,DataPresenca,HoraPresenca,))
         return cursor.fetchone()
     
+    def insert(self, dados):
+        cursor = self.db_connection.cursor()
+        query = "INSERT INTO presencas("
+        for dado in dados:
+            query = query + dado+","
+        query = (query[:-1])
+        query = query + ") VALUES("
+        for dado in dados:
+            query = query + "%s" + ","
+        query = (query[:-1])
+        query = query + ")"
+        for value in dados:
+        return dados
+        
     def closedb(self):
         self.db_connection.close()

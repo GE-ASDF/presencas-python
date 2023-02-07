@@ -12,7 +12,11 @@ alertPrimary = alert+"color: #004085; background-color: #cce5ff; border-color: #
 alertSuccess = alert+"color: #155724;background-color: #d4edda;border-color: #c3e6cb;"
 alertDanger = alert+"color: #721c24; background-color: #f8d7da; border-color: #f5c6cb;"
 
-   
+def insert(dados):
+    db = connection(host='servidorouro', user="prepara2", password="prepara", database="bd_presencas")
+    insert = db.insert(dados=dados)
+    return insert
+    
 def verificarPresenca(CodigoContrato, DataPresenca, HoraPresenca):
     db = connection(host='servidorouro', user="prepara2", password="prepara", database="bd_presencas")
     user = db.selectUserPresenca(CodigoContrato, DataPresenca, HoraPresenca)
@@ -77,17 +81,27 @@ def marcarPresenca():
                 "Computador" : ui.Computador.text(),
                 "IpComputador" : ui.IpComputador.text(),
             }
-            print(data)
+            
             for HoraP in data["HoraPresenca"]:
                 presencaConfirmada = verificarPresenca(CodigoContrato=data["CodigoContrato"], DataPresenca=data["DataPresenca"], HoraPresenca=HoraP)
                 if(presencaConfirmada):
                     pass
                 else:
+                    insert2 = insert(data)
+                    print(insert2)
+                    # if insert2:
+                    #     if insert2 >= 1:
+                    #         alert.setText("Sucesso! A sua presença foi confirmada. Feche esta janela e boa aula!")
+                    #         alert.setStyleSheet(alertSuccess)
+                    #     else:
+                    #         alert.setText("Falha! Houve erros na hora de confirmar sua presença.\nVerifique com seu educador(a).")
+                    #         alert.setStyleSheet(alertDanger)
+
                     pass
 
 
     else:
-        alert.setText("Não foi possível validar os dados, pois o usuário não foi informado.")
+        alert.setText("Não foi possível validar os dados.\nPreencha o campo de usuário e marque os horários corretamente.")
         alert.setStyleSheet(alertDanger)
 
 def fecharAlert():

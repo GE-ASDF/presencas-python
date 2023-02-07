@@ -31,7 +31,6 @@ def verificarUsuario(CodigoContrato):
         return user
     else:
         user = r.get("http://192.168.1.11/presencas/controllers/ApiController.php?CodigoContrato="+CodigoContrato)
-        print(user)
         return json.loads(user.content)
 
 def marcarPresenca():
@@ -85,19 +84,27 @@ def marcarPresenca():
             for HoraP in data["HoraPresenca"]:
                 presencaConfirmada = verificarPresenca(CodigoContrato=data["CodigoContrato"], DataPresenca=data["DataPresenca"], HoraPresenca=HoraP)
                 if(presencaConfirmada):
+                    alert.setText('A sua presença já foi confirmada. Feche esta janela e boa aula!')
+                    alert.setStyleSheet(alertPrimary)
                     pass
                 else:
-                    insert2 = insert(data)
-                    print(insert2)
-                    # if insert2:
-                    #     if insert2 >= 1:
-                    #         alert.setText("Sucesso! A sua presença foi confirmada. Feche esta janela e boa aula!")
-                    #         alert.setStyleSheet(alertSuccess)
-                    #     else:
-                    #         alert.setText("Falha! Houve erros na hora de confirmar sua presença.\nVerifique com seu educador(a).")
-                    #         alert.setStyleSheet(alertDanger)
-
-                    pass
+                    data2 = {
+                    "CodigoContrato" : CodigoContrato,
+                    "HoraPresenca": HoraP,
+                    "NomeAluno" : user['NomeAluno'],
+                    "DataPresenca" : ui.DataPresenca.text(),
+                    "DiaSemana" : ui.DiaSemana.text(),
+                    "Computador" : ui.Computador.text(),
+                    "IpComputador" : ui.IpComputador.text(),
+                    }
+                    insert2 = insert(data2)
+                    if insert2:
+                        alert.setText("Sucesso! A sua presença foi confirmada. Feche esta janela e boa aula!")
+                        alert.setStyleSheet(alertSuccess)
+                        print(insert2)
+                    else:
+                        alert.setText("Falha! Houve erros na hora de confirmar sua presença.\nVerifique com seu educador(a).")
+                        alert.setStyleSheet(alertDanger)
 
 
     else:

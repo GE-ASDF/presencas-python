@@ -34,17 +34,17 @@ class connection:
     
     def insert(self, dados):
         cursor = self.db_connection.cursor()
-        query = "INSERT INTO presencas("
+        query = """INSERT INTO presencas("""
         for dado in dados:
             query = query + dado+","
         query = (query[:-1])
         query = query + ") VALUES("
         for dado in dados:
-            query = query + "%s" + ","
+            query = query + ""+"'"+dados[""+dado+""]+"'"+"" + ","
         query = (query[:-1])
         query = query + ")"
-        for value in dados:
-        return dados
-        
+        cursor.execute(query)
+        return cursor.rowcount
+
     def closedb(self):
         self.db_connection.close()

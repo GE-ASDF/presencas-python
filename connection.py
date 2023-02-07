@@ -19,7 +19,12 @@ class connection:
         cursor = self.db_connection.cursor()
         query = "SELECT NOME AS NomeAluno FROM usuarios WHERE LOGIN = %s GROUP BY LOGIN"
         cursor.execute(query, (CodigoContrato,))
-        return cursor.fetchone()
+        try:
+            user = cursor.fetchone()[0]
+            dados = {'NomeAluno' : user}
+            return dados
+        except:
+            return {'NomeAluno':cursor.fetchone()}
 
     def selectUserPresenca(self, CodigoContrato, DataPresenca, HoraPresenca):
         cursor = self.db_connection.cursor()

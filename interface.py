@@ -14,19 +14,20 @@ alertDanger = alert+"color: #721c24; background-color: #f8d7da; border-color: #f
 
    
 def verificarPresenca(CodigoContrato, DataPresenca, HoraPresenca):
-    db = connection(host='localhost', user="prepara2", password="prepara", database="bd_presencas")
+    db = connection(host='servidorouro', user="prepara2", password="prepara", database="bd_presencas")
     user = db.selectUserPresenca(CodigoContrato, DataPresenca, HoraPresenca)
     return user
 
 def verificarUsuario(CodigoContrato):
     import requests as r
     import json
-    db = connection(host='localhost', user="prepara2", password="prepara", database="ouromoderno")
+    db = connection(host='servidorouro', user="prepara2", password="prepara", database="ouromoderno")
     user = db.selectUserOuro(CodigoContrato)
-    if user: 
+    if user['NomeAluno'] != None or user['NomeAluno']: 
         return user
     else:
-        user = r.get("http://localhost/presencas/controllers/ApiController.php?CodigoContrato="+CodigoContrato)
+        user = r.get("http://192.168.1.11/presencas/controllers/ApiController.php?CodigoContrato="+CodigoContrato)
+        print(user)
         return json.loads(user.content)
 
 def marcarPresenca():
@@ -76,12 +77,13 @@ def marcarPresenca():
                 "Computador" : ui.Computador.text(),
                 "IpComputador" : ui.IpComputador.text(),
             }
+            print(data)
             for HoraP in data["HoraPresenca"]:
                 presencaConfirmada = verificarPresenca(CodigoContrato=data["CodigoContrato"], DataPresenca=data["DataPresenca"], HoraPresenca=HoraP)
                 if(presencaConfirmada):
                     pass
                 else:
-                    print(HoraP)
+                    pass
 
 
     else:

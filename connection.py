@@ -2,7 +2,6 @@ import mysql.connector
 from mysql.connector import errorcode
 
 class connection:
-
     def __init__(self, host, user, password, database, port = 3306):
         try:
             self.db_connection = mysql.connector.connect(host=host, user=user, password=password, database=database, port=port)

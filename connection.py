@@ -34,16 +34,9 @@ class connection:
     
     def insert(self, dados):
         cursor = self.db_connection.cursor()
-        query = """INSERT INTO presencas("""
-        for dado in dados:
-            query = query + dado+","
-        query = (query[:-1])
-        query = query + ") VALUES("
-        for dado in dados:
-            query = query + ""+"'"+dados[""+dado+""]+"'"+"" + ","
-        query = (query[:-1])
-        query = query + ")"
-        cursor.execute(query)
+        query = """INSERT INTO presencas(CodigoContrato, NomeAluno, DataPresenca, HoraPresenca, DiaSemana, Computador, IpComputador) VALUES(%s, %s, %s, %s, %s, %s, %s)"""
+        cursor.execute(query, (dados["CodigoContrato"], dados['NomeAluno'], dados['DataPresenca'], dados['HoraPresenca'], dados['DiaSemana'], dados['Computador'], dados['IpComputador'],))
+        self.db_connection.commit()
         return cursor.rowcount
 
     def closedb(self):

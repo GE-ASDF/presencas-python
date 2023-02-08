@@ -12,8 +12,24 @@ alertPrimary = alert+"color: #004085; background-color: #cce5ff; border-color: #
 alertSuccess = alert+"color: #155724;background-color: #d4edda;border-color: #c3e6cb;"
 alertDanger = alert+"color: #721c24; background-color: #f8d7da; border-color: #f5c6cb;"
 
+def cleanAll():
+    ui.CodigoContrato.setText('')
+    ui.oito.setCheckState(0) if ui.oito.isChecked() else None,
+    ui.nove.setCheckState(0) if ui.nove.isChecked() else None,
+    ui.dez.setCheckState(0) if ui.dez.isChecked() else None,
+    ui.onze.setCheckState(0) if ui.onze.isChecked() else None,
+    ui.doze.setCheckState(0) if ui.doze.isChecked() else None,
+    ui.treze.setCheckState(0) if ui.treze.isChecked() else None,
+    ui.catorze.setCheckState(0) if ui.catorze.isChecked() else None,
+    ui.quinze.setCheckState(0) if ui.quinze.isChecked() else None,
+    ui.dezesseis.setCheckState(0) if ui.dezesseis.isChecked() else None,
+    ui.dezessete.setCheckState(0) if ui.dezessete.isChecked() else None,
+    ui.dezoito.setCheckState(0) if ui.dezoito.isChecked() else None,
+    ui.dezenove.setCheckState(0) if ui.dezenove.isChecked() else None,
+    ui.CodigoContrato.setFocus()
+
 def insert(dados):
-    db = connection(host='servidorouro', user="prepara2", password="prepara", database="bd_presencas")
+    db = connection(host='localhost', user="root", password="", database="bd_presencas")
     insert2 = db.insert(dados=dados)
     return insert2
     
@@ -86,7 +102,7 @@ def marcarPresenca():
                 if(presencaConfirmada):
                     alert.setText('A sua presença já foi confirmada. Feche esta janela e boa aula!')
                     alert.setStyleSheet(alertPrimary)
-                    pass
+                    cleanAll()
                 else:
                     data2 = {
                     "CodigoContrato" : CodigoContrato,
@@ -101,10 +117,11 @@ def marcarPresenca():
                     if insert2:
                         alert.setText("Sucesso! A sua presença foi confirmada. Feche esta janela e boa aula!")
                         alert.setStyleSheet(alertSuccess)
-                        print(insert2)
+                        cleanAll()
                     else:
                         alert.setText("Falha! Houve erros na hora de confirmar sua presença.\nVerifique com seu educador(a).")
                         alert.setStyleSheet(alertDanger)
+                        cleanAll()
 
 
     else:

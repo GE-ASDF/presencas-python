@@ -14,8 +14,8 @@ alertDanger = alert+"color: #721c24; background-color: #f8d7da; border-color: #f
 
 def insert(dados):
     db = connection(host='servidorouro', user="prepara2", password="prepara", database="bd_presencas")
-    insert = db.insert(dados=dados)
-    return insert
+    insert2 = db.insert(dados=dados)
+    return insert2
     
 def verificarPresenca(CodigoContrato, DataPresenca, HoraPresenca):
     db = connection(host='servidorouro', user="prepara2", password="prepara", database="bd_presencas")

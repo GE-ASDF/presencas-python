@@ -1035,7 +1035,7 @@ border:none;</string>
      <string>X</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="btnEsqueci">
     <property name="geometry">
      <rect>
       <x>30</x>
@@ -1087,7 +1087,7 @@ outline:none;</string>
    <zorder>registrar</zorder>
    <zorder>label_14</zorder>
    <zorder>fechar_alert</zorder>
-   <zorder>pushButton</zorder>
+   <zorder>btnEsqueci</zorder>
    <zorder>label_27</zorder>
   </widget>
  </widget>

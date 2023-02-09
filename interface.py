@@ -4,6 +4,7 @@ from connection import connection
 from datetime import date
 import socket
 
+
 sem = ("Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado", 'Domingo')
 data_atual = date.today().strftime('%d/%m/%Y')
 weekday = sem[date.today().weekday()]
@@ -11,6 +12,9 @@ alert = "font-size:16px;position: relative; padding: 0.75rem 1.25rem; margin-bot
 alertPrimary = alert+"color: #004085; background-color: #cce5ff; border-color: #b8daff;"
 alertSuccess = alert+"color: #155724;background-color: #d4edda;border-color: #c3e6cb;"
 alertDanger = alert+"color: #721c24; background-color: #f8d7da; border-color: #f5c6cb;"
+
+def abrirEsqueci():
+    ui.frm
 
 def cleanAll():
     ui.CodigoContrato.setText('')
@@ -134,11 +138,20 @@ def fecharAlert():
     ui.fechar_alert.setEnabled(False)
     ui.alert.clear()
     ui.fechar_alert.setText('')
+def message():
+    NomeAluno = formEsqueci.NomeCompleto.text()
 
+    print(NomeAluno)
+def abrirEsqueci():
+    formEsqueci.show()
+    btnBuscar = formEsqueci.btnBuscar
+    btnBuscar.clicked.connect(message)
+    
 if __name__ == '__main__':
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
+    MainWindow = uic.loadUi('presencas.ui')
+    formEsqueci = uic.loadUi('esqueci.ui')
     ui = Ui_widget()
     ui.setupUi(MainWindow)
     MainWindow.show()
@@ -148,4 +161,9 @@ if __name__ == '__main__':
     ui.Computador.setText(socket.gethostname())
     ui.IpComputador.setText(socket.gethostbyname(socket.gethostname()))
     ui.DiaSemana.setText(weekday)
+    ui.DataPresenca.setStyleSheet('color:transparent;background:transparent;border:none;')
+    ui.Computador.setStyleSheet('color:transparent;background:transparent;border:none;')
+    ui.IpComputador.setStyleSheet('color:transparent;background:transparent;border:none;')
+    ui.DiaSemana.setStyleSheet('color:transparent;background:transparent;border:none;')
+    ui.btnEsqueci.clicked.connect(abrirEsqueci)
     sys.exit(app.exec_())

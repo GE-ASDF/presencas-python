@@ -43,12 +43,15 @@ def cleanAll():
     ui.alert.clear()
     ui.fechar_alert.setText('')
 
-def timerEvent(max_wait = 300):
+def timerEvent(max_wait = 59):
     global time
     time = time.addSecs(1)
-    decorrido = int(time.toString("s"))
+    decorrido = int(time.toString("ss"))
     if decorrido >= max_wait:
         cleanAll()
+        timer.stop()
+        return True
+    print(decorrido)
         
 def insert(dados):
     db = connection(host='servidorouro', user="prepara2", password="prepara", database="bd_presencas")
@@ -216,6 +219,7 @@ def abrirEsqueci():
     btnBuscar = formEsqueci.btnBuscar
     btnBuscar.clicked.connect(getUserData)
     formEsqueci.NomeCompleto.returnPressed.connect(getUserData)
+
     
 if __name__ == '__main__':
     import sys

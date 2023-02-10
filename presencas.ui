@@ -2,28 +2,38 @@
 <ui version="4.0">
  <class>widget</class>
  <widget class="QWidget" name="widget">
+  <property name="windowModality">
+   <enum>Qt::WindowModal</enum>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>965</width>
-    <height>743</height>
+    <height>674</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
     <width>965</width>
-    <height>743</height>
+    <height>674</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
     <width>965</width>
-    <height>743</height>
+    <height>674</height>
    </size>
   </property>
   <property name="windowTitle">
    <string>Dê sua presença</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>dist/favicon.ico</normaloff>dist/favicon.ico</iconset>
+  </property>
+  <property name="windowOpacity">
+   <double>1.000000000000000</double>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color:#fff;</string>
@@ -31,10 +41,10 @@
   <widget class="QFrame" name="frame">
    <property name="geometry">
     <rect>
-     <x>0</x>
-     <y>0</y>
+     <x>10</x>
+     <y>-20</y>
      <width>1021</width>
-     <height>751</height>
+     <height>691</height>
     </rect>
    </property>
    <property name="frameShape">
@@ -63,14 +73,15 @@
     <property name="geometry">
      <rect>
       <x>30</x>
-      <y>70</y>
+      <y>50</y>
       <width>531</width>
       <height>81</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">font-size:64px;
-font-weight:bold;</string>
+     <string notr="true">font-size:42px;
+font-weight:bold;
+background:transparent;</string>
     </property>
     <property name="text">
      <string>Dê sua presença</string>
@@ -80,13 +91,13 @@ font-weight:bold;</string>
     <property name="geometry">
      <rect>
       <x>30</x>
-      <y>160</y>
+      <y>140</y>
       <width>141</width>
-      <height>51</height>
+      <height>41</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">font-size:32px;
+     <string notr="true">font-size:24px;
 font-weight:bold;
 color:#454545;</string>
     </property>
@@ -98,8 +109,8 @@ color:#454545;</string>
     <property name="geometry">
      <rect>
       <x>30</x>
-      <y>140</y>
-      <width>91</width>
+      <y>120</y>
+      <width>51</width>
       <height>16</height>
      </rect>
     </property>
@@ -116,7 +127,7 @@ width:75px;</string>
     <property name="geometry">
      <rect>
       <x>30</x>
-      <y>210</y>
+      <y>180</y>
       <width>661</width>
       <height>51</height>
      </rect>
@@ -128,6 +139,9 @@ outline:none;
 font-size:24px;
 background:#E7D8E9
 </string>
+    </property>
+    <property name="placeholderText">
+     <string>Exemplo: 423365 ou LUCASK (Não digite seu nome)</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_2">
@@ -150,7 +164,7 @@ background:#E7D8E9
     <property name="geometry">
      <rect>
       <x>30</x>
-      <y>280</y>
+      <y>250</y>
       <width>661</width>
       <height>381</height>
      </rect>
@@ -314,6 +328,9 @@ color:transparent;</string>
      </property>
     </widget>
     <widget class="QLabel" name="label_5">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>0</x>
@@ -849,7 +866,7 @@ background:transparent;
      </property>
      <property name="geometry">
       <rect>
-       <x>160</x>
+       <x>170</x>
        <y>60</y>
        <width>161</width>
        <height>51</height>
@@ -857,32 +874,13 @@ background:transparent;
      </property>
      <property name="styleSheet">
       <string notr="true">border:none;
-border-bottom:none;
+border:none;
 outline:none;
 font-size:0px;
-background:transparent;
-</string>
+background:transparent;</string>
      </property>
-    </widget>
-    <widget class="QLineEdit" name="Computador">
-     <property name="enabled">
-      <bool>false</bool>
-     </property>
-     <property name="geometry">
-      <rect>
-       <x>320</x>
-       <y>60</y>
-       <width>161</width>
-       <height>51</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">border:none;
-border-bottom:none;
-outline:none;
-font-size:0px;
-background:transparent;
-</string>
+     <property name="placeholderText">
+      <string/>
      </property>
     </widget>
     <widget class="QLineEdit" name="IpComputador">
@@ -891,7 +889,7 @@ background:transparent;
      </property>
      <property name="geometry">
       <rect>
-       <x>480</x>
+       <x>330</x>
        <y>60</y>
        <width>161</width>
        <height>51</height>
@@ -899,11 +897,36 @@ background:transparent;
      </property>
      <property name="styleSheet">
       <string notr="true">border:none;
-border-bottom:none;
+border:none;
 outline:none;
 font-size:0px;
-background:transparent;
-</string>
+background:transparent;</string>
+     </property>
+     <property name="placeholderText">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="Computador">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>60</y>
+       <width>161</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border:none;
+border:none;
+outline:none;
+font-size:0px;
+background:transparent;</string>
+     </property>
+     <property name="placeholderText">
+      <string/>
      </property>
     </widget>
     <zorder>label_5</zorder>
@@ -941,14 +964,14 @@ background:transparent;
     <zorder>onze</zorder>
     <zorder>DataPresenca</zorder>
     <zorder>DiaSemana</zorder>
-    <zorder>Computador</zorder>
     <zorder>IpComputador</zorder>
+    <zorder>Computador</zorder>
    </widget>
    <widget class="QPushButton" name="registrar">
     <property name="geometry">
      <rect>
       <x>30</x>
-      <y>680</y>
+      <y>640</y>
       <width>131</width>
       <height>41</height>
      </rect>
@@ -1039,7 +1062,7 @@ border:none;</string>
     <property name="geometry">
      <rect>
       <x>30</x>
-      <y>260</y>
+      <y>230</y>
       <width>101</width>
       <height>21</height>
      </rect>

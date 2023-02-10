@@ -14,12 +14,17 @@ from PyQt5 import QtCore, QtGui, QtWidgets, uic
 class Ui_widget(object):
     def setupUi(self, widget):
         widget.setObjectName("widget")
-        widget.resize(965, 743)
-        widget.setMinimumSize(QtCore.QSize(965, 743))
-        widget.setMaximumSize(QtCore.QSize(965, 743))
+        widget.setWindowModality(QtCore.Qt.WindowModal)
+        widget.resize(965, 674)
+        widget.setMinimumSize(QtCore.QSize(965, 674))
+        widget.setMaximumSize(QtCore.QSize(965, 674))
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("dist/favicon.ico"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        widget.setWindowIcon(icon)
+        widget.setWindowOpacity(1.0)
         widget.setStyleSheet("background-color:#fff;")
         self.frame = QtWidgets.QFrame(widget)
-        self.frame.setGeometry(QtCore.QRect(0, 0, 1021, 751))
+        self.frame.setGeometry(QtCore.QRect(10, -20, 1021, 691))
         self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame.setObjectName("frame")
@@ -29,25 +34,26 @@ class Ui_widget(object):
         self.alert.setText("")
         self.alert.setObjectName("alert")
         self.label = QtWidgets.QLabel(self.frame)
-        self.label.setGeometry(QtCore.QRect(30, 70, 531, 81))
-        self.label.setStyleSheet("font-size:64px;\n"
-"font-weight:bold;")
+        self.label.setGeometry(QtCore.QRect(30, 50, 531, 81))
+        self.label.setStyleSheet("font-size:42px;\n"
+"font-weight:bold;\n"
+"background:transparent;")
         self.label.setObjectName("label")
         self.label_4 = QtWidgets.QLabel(self.frame)
-        self.label_4.setGeometry(QtCore.QRect(30, 160, 141, 51))
-        self.label_4.setStyleSheet("font-size:32px;\n"
+        self.label_4.setGeometry(QtCore.QRect(30, 140, 141, 41))
+        self.label_4.setStyleSheet("font-size:24px;\n"
 "font-weight:bold;\n"
 "color:#454545;")
         self.label_4.setObjectName("label_4")
         self.label_3 = QtWidgets.QLabel(self.frame)
-        self.label_3.setGeometry(QtCore.QRect(30, 140, 91, 16))
+        self.label_3.setGeometry(QtCore.QRect(30, 120, 51, 16))
         self.label_3.setStyleSheet("background-color:#D9DC3B;\n"
 "height:10px;\n"
 "width:75px;")
         self.label_3.setText("")
         self.label_3.setObjectName("label_3")
         self.CodigoContrato = QtWidgets.QLineEdit(self.frame)
-        self.CodigoContrato.setGeometry(QtCore.QRect(30, 210, 661, 51))
+        self.CodigoContrato.setGeometry(QtCore.QRect(30, 180, 661, 51))
         self.CodigoContrato.setStyleSheet("border:none;\n"
 "border-bottom:1px solid purple;\n"
 "outline:none;\n"
@@ -61,7 +67,7 @@ class Ui_widget(object):
         self.label_2.setText("")
         self.label_2.setObjectName("label_2")
         self.frame_2 = QtWidgets.QFrame(self.frame)
-        self.frame_2.setGeometry(QtCore.QRect(30, 280, 661, 381))
+        self.frame_2.setGeometry(QtCore.QRect(30, 250, 661, 381))
         self.frame_2.setStyleSheet("background:#232323")
         self.frame_2.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_2.setFrameShadow(QtWidgets.QFrame.Raised)
@@ -118,6 +124,7 @@ class Ui_widget(object):
 "color:transparent;")
         self.dezoito.setObjectName("dezoito")
         self.label_5 = QtWidgets.QLabel(self.frame_2)
+        self.label_5.setEnabled(False)
         self.label_5.setGeometry(QtCore.QRect(0, 0, 661, 391))
         self.label_5.setStyleSheet("background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(0, 0, 0, 255), stop:1 rgba(255, 255, 255, 255))qlineargradient(spread:pad, x1:0.483, y1:0.216, x2:0.506, y2:0.994, stop:0 rgba(85, 0, 127, 255), stop:0.784091 rgba(25, 25, 25, 255))")
         self.label_5.setText("")
@@ -304,34 +311,34 @@ class Ui_widget(object):
         self.DataPresenca.setObjectName("DataPresenca")
         self.DiaSemana = QtWidgets.QLineEdit(self.frame_2)
         self.DiaSemana.setEnabled(False)
-        self.DiaSemana.setGeometry(QtCore.QRect(160, 60, 161, 51))
+        self.DiaSemana.setGeometry(QtCore.QRect(170, 60, 161, 51))
         self.DiaSemana.setStyleSheet("border:none;\n"
-"border-bottom:none;\n"
+"border:none;\n"
 "outline:none;\n"
 "font-size:0px;\n"
-"background:transparent;\n"
-"")
+"background:transparent;")
+        self.DiaSemana.setPlaceholderText("")
         self.DiaSemana.setObjectName("DiaSemana")
-        self.Computador = QtWidgets.QLineEdit(self.frame_2)
-        self.Computador.setEnabled(False)
-        self.Computador.setGeometry(QtCore.QRect(320, 60, 161, 51))
-        self.Computador.setStyleSheet("border:none;\n"
-"border-bottom:none;\n"
-"outline:none;\n"
-"font-size:0px;\n"
-"background:transparent;\n"
-"")
-        self.Computador.setObjectName("Computador")
         self.IpComputador = QtWidgets.QLineEdit(self.frame_2)
         self.IpComputador.setEnabled(False)
-        self.IpComputador.setGeometry(QtCore.QRect(480, 60, 161, 51))
+        self.IpComputador.setGeometry(QtCore.QRect(330, 60, 161, 51))
         self.IpComputador.setStyleSheet("border:none;\n"
-"border-bottom:none;\n"
+"border:none;\n"
 "outline:none;\n"
 "font-size:0px;\n"
-"background:transparent;\n"
-"")
+"background:transparent;")
+        self.IpComputador.setPlaceholderText("")
         self.IpComputador.setObjectName("IpComputador")
+        self.Computador = QtWidgets.QLineEdit(self.frame_2)
+        self.Computador.setEnabled(False)
+        self.Computador.setGeometry(QtCore.QRect(10, 60, 161, 51))
+        self.Computador.setStyleSheet("border:none;\n"
+"border:none;\n"
+"outline:none;\n"
+"font-size:0px;\n"
+"background:transparent;")
+        self.Computador.setPlaceholderText("")
+        self.Computador.setObjectName("Computador")
         self.label_5.raise_()
         self.label_7.raise_()
         self.label_6.raise_()
@@ -367,10 +374,10 @@ class Ui_widget(object):
         self.onze.raise_()
         self.DataPresenca.raise_()
         self.DiaSemana.raise_()
-        self.Computador.raise_()
         self.IpComputador.raise_()
+        self.Computador.raise_()
         self.registrar = QtWidgets.QPushButton(self.frame)
-        self.registrar.setGeometry(QtCore.QRect(30, 680, 131, 41))
+        self.registrar.setGeometry(QtCore.QRect(30, 640, 131, 41))
         self.registrar.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.registrar.setMouseTracking(False)
         self.registrar.setFocusPolicy(QtCore.Qt.ClickFocus)
@@ -406,7 +413,7 @@ class Ui_widget(object):
 "border:none;")
         self.fechar_alert.setObjectName("fechar_alert")
         self.btnEsqueci = QtWidgets.QPushButton(self.frame)
-        self.btnEsqueci.setGeometry(QtCore.QRect(30, 260, 101, 21))
+        self.btnEsqueci.setGeometry(QtCore.QRect(30, 230, 101, 21))
         self.btnEsqueci.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.btnEsqueci.setStyleSheet("color: #007bff;\n"
 "    text-decoration: none;\n"
@@ -441,6 +448,7 @@ class Ui_widget(object):
         widget.setWindowTitle(_translate("widget", "Dê sua presença"))
         self.label.setText(_translate("widget", "Dê sua presença"))
         self.label_4.setText(_translate("widget", "Usuário:"))
+        self.CodigoContrato.setPlaceholderText(_translate("widget", "Exemplo: 423365 ou LUCASK (Não digite seu nome)"))
         self.dezesseis.setText(_translate("widget", "16:00"))
         self.treze.setText(_translate("widget", "13:00"))
         self.label_7.setText(_translate("widget", "INSTRUÇÕES"))

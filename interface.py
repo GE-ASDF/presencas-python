@@ -3,7 +3,9 @@ import pyautogui as p
 from connection import connection
 from datetime import date
 import socket
-
+import requests as r
+import json
+from time import sleep
 
 sem = ("Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado", 'Domingo')
 data_atual = date.today().strftime('%d/%m/%Y')
@@ -13,8 +15,6 @@ alertPrimary = alert+"color: #004085; background-color: #cce5ff; border-color: #
 alertSuccess = alert+"color: #155724;background-color: #d4edda;border-color: #c3e6cb;"
 alertDanger = alert+"color: #721c24; background-color: #f8d7da; border-color: #f5c6cb;"
 
-def abrirEsqueci():
-    ui.frm
 
 def cleanAll():
     ui.CodigoContrato.setText('')
@@ -31,9 +31,27 @@ def cleanAll():
     ui.dezoito.setCheckState(0) if ui.dezoito.isChecked() else None,
     ui.dezenove.setCheckState(0) if ui.dezenove.isChecked() else None,
     ui.CodigoContrato.setFocus()
+    formEsqueci.alert.setText('')
+    formEsqueci.alert.setStyleSheet('')
+    formEsqueci.NomeCompleto.setText('')
+    formEsqueci.lbl_usuario.setText('')
+    formEsqueci.lbl_senha.setText('')
+    formEsqueci.frame_dados.setStyleSheet('')
+    ui.alert.setStyleSheet('')
+    ui.fechar_alert.setStyleSheet('border:none')
+    ui.fechar_alert.setEnabled(False)
+    ui.alert.clear()
+    ui.fechar_alert.setText('')
 
+def timerEvent(max_wait = 300):
+    global time
+    time = time.addSecs(1)
+    decorrido = int(time.toString("s"))
+    if decorrido >= max_wait:
+        cleanAll()
+        
 def insert(dados):
-    db = connection(host='localhost', user="root", password="", database="bd_presencas")
+    db = connection(host='servidorouro', user="prepara2", password="prepara", database="bd_presencas")
     insert2 = db.insert(dados=dados)
     return insert2
     
@@ -43,8 +61,6 @@ def verificarPresenca(CodigoContrato, DataPresenca, HoraPresenca):
     return user
 
 def verificarUsuario(CodigoContrato):
-    import requests as r
-    import json
     db = connection(host='servidorouro', user="prepara2", password="prepara", database="ouromoderno")
     user = db.selectUserOuro(CodigoContrato)
     if user['NomeAluno'] != None or user['NomeAluno']: 
@@ -54,6 +70,8 @@ def verificarUsuario(CodigoContrato):
         return json.loads(user.content)
 
 def marcarPresenca():
+    timer.timeout.connect(timerEvent)
+    timer.start(1000)
     lista = [
             ui.oito.text() if ui.oito.isChecked() else None,
             ui.nove.text() if ui.nove.isChecked() else None,
@@ -131,6 +149,7 @@ def marcarPresenca():
     else:
         alert.setText("Não foi possível validar os dados.\nPreencha o campo de usuário e marque os horários corretamente.")
         alert.setStyleSheet(alertDanger)
+    
 
 def fecharAlert():
     ui.alert.setStyleSheet('')
@@ -138,14 +157,65 @@ def fecharAlert():
     ui.fechar_alert.setEnabled(False)
     ui.alert.clear()
     ui.fechar_alert.setText('')
-def message():
-    NomeAluno = formEsqueci.NomeCompleto.text()
 
-    print(NomeAluno)
+    
+def getUserData():
+    NomeAluno = formEsqueci.NomeCompleto.text()
+    max_wait = 300
+    timer.timeout.connect(timerEvent, max_wait)
+    timer.start(1000)
+    if not NomeAluno:
+        formEsqueci.NomeCompleto.setText('')
+        formEsqueci.alert.setStyleSheet(alertDanger)
+        formEsqueci.alert.setText("Não foi possível validar os dados. Tente novamente!")
+        formEsqueci.lbl_usuario.setText('')
+        formEsqueci.lbl_senha.setText('')
+        formEsqueci.frame_dados.setStyleSheet('')        
+    else:
+        db = connection(host='servidorouro', user="prepara2", password="prepara", database="ouromoderno")
+        user = db.selectUserOuroByTheName(NomeAluno)
+        if user != False:
+            try:
+                formEsqueci.frame_dados.setStyleSheet(alertSuccess)
+                formEsqueci.lbl_usuario.setText(user['CodigoContrato'])
+                formEsqueci.lbl_senha.setText(user['SenhaAluno'])
+                formEsqueci.alert.setText('')
+                formEsqueci.alert.setStyleSheet('')
+                formEsqueci.NomeCompleto.setText('')
+            except:
+                formEsqueci.NomeCompleto.setText('')
+                formEsqueci.alert.setStyleSheet(alertDanger)
+                formEsqueci.alert.setText("Não foi possível validar os dados. Tente novamente!")
+                formEsqueci.lbl_usuario.setText('')
+                formEsqueci.lbl_senha.setText('')
+                formEsqueci.frame_dados.setStyleSheet('')
+        else:
+            user = r.get("http://192.168.1.11/presencas/controllers/getUserData.php?NomeAluno="+NomeAluno)
+            user2 = json.loads(user.content)
+            try:
+                formEsqueci.lbl_usuario.setText('')
+                formEsqueci.lbl_senha.setText('')
+                formEsqueci.alert.setStyleSheet(alertDanger)
+                formEsqueci.alert.setText(user2['message'])
+                formEsqueci.NomeCompleto.setText('')
+                formEsqueci.frame_dados.setStyleSheet('')
+            except:
+                formEsqueci.NomeCompleto.setText('')
+                formEsqueci.alert.setStyleSheet('')
+                formEsqueci.alert.setText('')
+                formEsqueci.frame_dados.setStyleSheet(alertSuccess)
+                formEsqueci.lbl_usuario.setText(str(user2['CodigoContrato']))
+                try:
+                    formEsqueci.lbl_senha.setText(user2['SenhaAluno'])
+                except:
+                    formEsqueci.lbl_senha.setText("Prep-123")
+  
+
 def abrirEsqueci():
     formEsqueci.show()
     btnBuscar = formEsqueci.btnBuscar
-    btnBuscar.clicked.connect(message)
+    btnBuscar.clicked.connect(getUserData)
+    formEsqueci.NomeCompleto.returnPressed.connect(getUserData)
     
 if __name__ == '__main__':
     import sys
@@ -155,6 +225,8 @@ if __name__ == '__main__':
     ui = Ui_widget()
     ui.setupUi(MainWindow)
     MainWindow.show()
+    timer = QtCore.QTimer()
+    time = QtCore.QTime(0, 0, 0)
     ui.registrar.clicked.connect(marcarPresenca)
     ui.fechar_alert.clicked.connect(fecharAlert)
     ui.DataPresenca.setText(data_atual)

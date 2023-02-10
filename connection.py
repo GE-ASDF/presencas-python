@@ -40,3 +40,14 @@ class connection:
 
     def closedb(self):
         self.db_connection.close()
+
+    def selectUserOuroByTheName(self, NomeAluno):
+        cursor = self.db_connection.cursor()
+        query = "SELECT LOGIN, SENHA FROM usuarios WHERE NOME = %s GROUP BY NOME"
+        cursor.execute(query, (NomeAluno,))
+        try:
+            user = cursor.fetchone()
+            dados = {'CodigoContrato' : user[0], 'SenhaAluno' : user[1]}
+            return dados
+        except:
+            return False

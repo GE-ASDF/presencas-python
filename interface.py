@@ -127,7 +127,6 @@ def marcarPresenca():
                 if(presencaConfirmada):
                     alert.setText('A sua presença já foi confirmada. Feche esta janela e boa aula!')
                     alert.setStyleSheet(alertPrimary)
-                    cleanAll()
                 else:
                     data2 = {
                     "CodigoContrato" : CodigoContrato,
@@ -142,11 +141,9 @@ def marcarPresenca():
                     if insert2:
                         alert.setText("Sucesso! A sua presença foi confirmada. Feche esta janela e boa aula!")
                         alert.setStyleSheet(alertSuccess)
-                        cleanAll()
                     else:
                         alert.setText("Falha! Houve erros na hora de confirmar sua presença.\nVerifique com seu educador(a).")
                         alert.setStyleSheet(alertDanger)
-                        cleanAll()
 
 
     else:

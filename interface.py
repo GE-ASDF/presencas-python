@@ -15,9 +15,7 @@ alertPrimary = alert+"color: #004085; background-color: #cce5ff; border-color: #
 alertSuccess = alert+"color: #155724;background-color: #d4edda;border-color: #c3e6cb;"
 alertDanger = alert+"color: #721c24; background-color: #f8d7da; border-color: #f5c6cb;"
 
-
-def cleanAll():
-    ui.CodigoContrato.setText('')
+def cleanCheckboxes():
     ui.oito.setCheckState(0) if ui.oito.isChecked() else None,
     ui.nove.setCheckState(0) if ui.nove.isChecked() else None,
     ui.dez.setCheckState(0) if ui.dez.isChecked() else None,
@@ -30,18 +28,33 @@ def cleanAll():
     ui.dezessete.setCheckState(0) if ui.dezessete.isChecked() else None,
     ui.dezoito.setCheckState(0) if ui.dezoito.isChecked() else None,
     ui.dezenove.setCheckState(0) if ui.dezenove.isChecked() else None,
-    ui.CodigoContrato.setFocus()
-    formEsqueci.alert.setText('')
-    formEsqueci.alert.setStyleSheet('')
+
+def cleanCodigoContratoNomeCompleto():
+    ui.CodigoContrato.setText('')
     formEsqueci.NomeCompleto.setText('')
-    formEsqueci.lbl_usuario.setText('')
-    formEsqueci.lbl_senha.setText('')
-    formEsqueci.frame_dados.setStyleSheet('')
+
+
+def cleanFormPresenca():
+    ui.CodigoContrato.setText('')
     ui.alert.setStyleSheet('')
     ui.fechar_alert.setStyleSheet('border:none')
     ui.fechar_alert.setEnabled(False)
     ui.alert.clear()
     ui.fechar_alert.setText('')
+    ui.CodigoContrato.setFocus()
+
+def cleanFormEsqueci():
+    formEsqueci.NomeCompleto.setText('')
+    formEsqueci.lbl_usuario.setText('')
+    formEsqueci.lbl_senha.setText('')
+    formEsqueci.alert.setText('')
+    formEsqueci.alert.setStyleSheet('')
+    formEsqueci.frame_dados.setStyleSheet('')
+
+def cleanAll():
+   cleanCheckboxes()
+   cleanFormEsqueci()
+   cleanFormPresenca()
 
 def timerEvent(max_wait = 59):
     global time
@@ -127,6 +140,8 @@ def marcarPresenca():
                 if(presencaConfirmada):
                     alert.setText('A sua presença já foi confirmada. Feche esta janela e boa aula!')
                     alert.setStyleSheet(alertPrimary)
+                    cleanCheckboxes()
+                    cleanCodigoContratoNomeCompleto()
                 else:
                     data2 = {
                     "CodigoContrato" : CodigoContrato,
@@ -141,9 +156,13 @@ def marcarPresenca():
                     if insert2:
                         alert.setText("Sucesso! A sua presença foi confirmada. Feche esta janela e boa aula!")
                         alert.setStyleSheet(alertSuccess)
+                        cleanCheckboxes()
+                        cleanCodigoContratoNomeCompleto()
                     else:
                         alert.setText("Falha! Houve erros na hora de confirmar sua presença.\nVerifique com seu educador(a).")
                         alert.setStyleSheet(alertDanger)
+                        cleanCheckboxes()
+                        cleanCodigoContratoNomeCompleto()
 
 
     else:
